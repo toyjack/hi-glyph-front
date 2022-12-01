@@ -3,7 +3,7 @@ import {useEffect} from 'react'
 
 function LogoutPage() {
   useEffect(() => {
-    localStorage.clear()
+    localStorage.clear();
   }, [])
 
   return (

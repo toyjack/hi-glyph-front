@@ -22,13 +22,8 @@ async function getProfile(token:string){
 
 function ProfilePage() {
   const router = useRouter()
-  const accessToken = localStorage.getItem('accessToken') || ''
-  if(!accessToken){
-    router.push('/user/login')
-  }
-  console.log(accessToken)
-
-  const [profile, setProfile] = useState({})
+  const [profile, setProfile] = useState<Profile>();
+  let accessToken:string;
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -36,13 +31,17 @@ function ProfilePage() {
       setProfile(profile);
     };
     fetchProfile();
-  }, [accessToken]);
+    accessToken = localStorage.getItem("accessToken") || "";
+    if (!accessToken) {
+      router.push("/user/login");
+    }
+  }, []);
   
   console.log(profile)
 
   return (
     <div>
-      {profile.username }
+      {profile?.username }
     </div>
   )
 }

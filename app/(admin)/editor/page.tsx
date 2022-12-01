@@ -1,12 +1,9 @@
+import React from 'react'
 
-type Props = {
-  name: string;
-  related: string;
-  data: string;
+function EditorPage() {
+  return (
+    <div>EditorPage</div>
+  )
 }
 
-function EditorPage(props: Props) {
-  return ;
-}
-
-export default EditorPage;
+export default EditorPage

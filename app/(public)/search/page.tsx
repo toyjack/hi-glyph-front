@@ -2,18 +2,18 @@
 import { useState, useRef } from "react";
 import Card from './Card'
 
-type GlyphData ={
+type Glyph = {
   name: string;
   related: string;
   data: string;
-}
+};
 
 function SearchPage() {
   const userRef = useRef<HTMLInputElement>(null);
   const relatedRef = useRef<HTMLInputElement>(null);
   const containsRef = useRef<HTMLInputElement>(null);
   
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<Glyph[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -43,7 +43,7 @@ function LoginPage() {
 
     const accessToken = await getToken(email, password);
     if (accessToken) {
-      localStorage.setItem("accessToken", accessToken);
+      window.localStorage.setItem("accessToken", accessToken);
       router.push("/user/profile");
     }
   };

@@ -26,18 +26,19 @@ async function getGlyphData(glyphName: string) : Promise<Glyph> {
 }
 
 export default function EditPage({ params: { glyphName } }: PageProps) {
-  const [glyphData, setGlyphData] = useState({});
-  const accessToken = localStorage.getItem('accessToken');
+  const [glyphData, setGlyphData] = useState<Glyph>();
+  let accessToken;
+  useEffect(() => {
+    getGlyphData(glyphName).then((data) => {
+      setGlyphData(data);
+    });
+    accessToken = localStorage.getItem("accessToken");
+  }, [glyphName]);   
   if (!accessToken) {
     return (
       <div>login first</div>
     )
   }
-  useEffect(() => {
-    getGlyphData(glyphName).then((data) => {
-      setGlyphData(data);
-    });
-  }, []);  
 
   console.log(glyphData)
   return (
@@ -49,7 +50,7 @@ export default function EditPage({ params: { glyphName } }: PageProps) {
         </Link>
       </div>
       <Iframe
-        url={`https://glittery-banoffee-0e4398.netlify.app/#name=${glyphName}&data=${glyphData.data}&related=${glyphData.related}&token=${accessToken}`}
+        url={`https://glittery-banoffee-0e4398.netlify.app/#name=${glyphName}&data=${glyphData?.data}&related=${glyphData?.related}&token=${accessToken}`}
         position="relative"
         width="100%"
         height="100%"

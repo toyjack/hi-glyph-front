@@ -27,27 +27,31 @@ async function getGlyphData(glyphName: string) : Promise<Glyph> {
 
 export default function EditPage({ params: { glyphName } }: PageProps) {
   const [glyphData, setGlyphData] = useState<Glyph>();
-  let accessToken;
+  const [accessToken, setAccessToken] = useState<string>();
   useEffect(() => {
     getGlyphData(glyphName).then((data) => {
       setGlyphData(data);
     });
-    accessToken = localStorage.getItem("accessToken");
+    setAccessToken(localStorage.getItem("accessToken")||"");
   }, [glyphName]);   
-  if (!accessToken) {
-    return (
-      <div>login first</div>
-    )
-  }
 
-  console.log(glyphData)
   return (
-    <div className="py-5 rounded-box overflow-hidden shadow-md absolute h-full w-5/6">
-      <div className="flex">
-        <h2>Glyph Name: {glyphName}</h2>
-        <Link href={`/glyphs/${glyphName}`} className="btn">
-          Back
-        </Link>
+    <div className="flex flex-col items-center justify-center py-5 rounded-box overflow-hidden shadow-md absolute h-full w-full md:w-5/6">
+      <div className="flex items-center justify-center">
+        <h2 className="font-bold text-xl">
+          Glyph Name: <span className="text-primary">{glyphName}</span>
+        </h2>
+
+        <div className="p-3">
+          <Link href={`/glyphs/${glyphName}`} className="btn btn-info ">
+            Back
+          </Link>
+        </div>
+      </div>
+      <div>
+        <p>
+          編集をクリックすると保存となります。「BACK」をクリックして確認できます。
+        </p>
       </div>
       <Iframe
         url={`https://glittery-banoffee-0e4398.netlify.app/#name=${glyphName}&data=${glyphData?.data}&related=${glyphData?.related}&token=${accessToken}`}

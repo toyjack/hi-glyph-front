@@ -1,11 +1,12 @@
-import './globals.css'
+"use client";
+import "./globals.css";
 
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="ja" data-theme="winter">

@@ -20,7 +20,9 @@ function Card(props:Props) {
           <Link href={detailsUrl} className="btn btn-info">
             詳細
           </Link>
-          <button className="btn btn-warning">編集</button>
+          <Link className="btn btn-warning" href={`${detailsUrl}/edit`}>
+            編集
+          </Link>
         </div>
       </div>
     </div>

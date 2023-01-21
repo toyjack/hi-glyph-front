@@ -20,10 +20,8 @@ async function getToken(username: string, password: string) {
   );
   const data = await res.json();
   if (data.error) {
-    console.error(data.error);
     return;
   }
-  console.log(data);
   return data["access_token"];
 }
 
@@ -31,49 +29,55 @@ function LoginPage() {
   const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
-    console.log({
-      email,
-      password,
-    });
 
     const accessToken = await getToken(email, password);
     if (accessToken) {
-      window.localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       router.push("/user/profile");
     }
   };
 
   return (
-    <div className="flex flex-grow py-4 w-1/3 items-center justify-center">
-      <div className=" rounded-box shadow-lg p-4 bg-base-100">
+    <div className="flex flex-grow py-4 gap-5 items-center justify-center">
+      <div className="rounded-box shadow-lg p-4 bg-base-100">
         <h2 className="text-lg font-bold">ログイン</h2>
         <form action="#" className="flex flex-col" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email:</label>
-          <input
-            className=" input input-primary"
-            type="email"
-            id="email"
-            ref={emailRef}
-          />
+          <div className="flex flex-col py-4">
+            <label className="text-primary" htmlFor="email">
+              Email
+            </label>
+            <input
+              className=" input input-primary"
+              type="email"
+              id="email"
+              ref={emailRef}
+            />
+          </div>
 
-          <label htmlFor="password">Password:</label>
-          <input
-            className=" input input-primary"
-            type="password"
-            id="password"
-            ref={passwordRef}
-          />
+          <div className="flex flex-col py-4">
+            <label className="" htmlFor="password">
+              Password:
+            </label>
+            <input
+              className="input input-primary p-2"
+              type="password"
+              id="password"
+              ref={passwordRef}
+            />
+          </div>
 
-          <input
-            className="btn btn-primary pt-3"
-            type="submit"
-            value="Submit"
-          />
+          <div className="flex py-4">
+            <input
+              className="btn btn-primary w-full"
+              type="submit"
+              value="ログイン"
+            />
+          </div>
         </form>
       </div>
     </div>

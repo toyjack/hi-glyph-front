@@ -13,7 +13,6 @@ function RegisterPage() {
       alert('パスワードが一致しません')
       return
     }
-    console.log({email, password, passwordConfirmation})
 
     const res = await fetch(
       "https://glyph.lab.hi.u-tokyo.ac.jp/auth/register",
@@ -35,7 +34,6 @@ function RegisterPage() {
       return;
     }
 
-    console.log(data);
   }
 
   const handleEmailChange= (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,32 +47,50 @@ function RegisterPage() {
   }
   
   return (
-    <div className="flex flex-grow py-4 w-1/3 items-center justify-center">
-      <div className=" rounded-box shadow-lg p-4 bg-base-100">
+    <div className="flex py-4 items-center justify-center">
+      <div className="flex flex-col rounded-box shadow-lg p-4 bg-base-100">
         <h2 className="text-lg font-bold">ユーザー登録</h2>
-        <form action="#" className="flex flex-col" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email:</label>
-          <input className=" input input-primary" type="email" id="email" value={email} onChange={handleEmailChange} />
 
-          <label htmlFor="password">Password:</label>
-          <input
-            className=" input input-primary"
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+        <form action="#" className="flex flex-col py-2" onSubmit={handleSubmit}>
+          <div className="flex flex-col py-4">
+            <label htmlFor="email">Email</label>
+            <input
+              className=" input input-primary"
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </div>
 
-          <label htmlFor="repassword">Re-password:</label>
-          <input
-            className=" input input-primary"
-            type="password"
-            id="repassword"
-            value={passwordConfirmation}
-            onChange={handlePasswordConfirmationChange}
-          />
+          <div className="flex flex-col py-4">
+            <label htmlFor="password">Password:</label>
+            <input
+              className=" input input-primary"
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
 
-          <input className='btn btn-primary pt-3' type="submit" value="Submit" />
+          <div className="flex flex-col py-4">
+            <label htmlFor="repassword">Re-password:</label>
+            <input
+              className=" input input-primary"
+              type="password"
+              id="repassword"
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
+            />
+          </div>
+          <div className="flex flex-col py-4">
+            <input
+              className="btn btn-primary pt-3"
+              type="submit"
+              value="登録"
+            />
+          </div>
         </form>
       </div>
     </div>

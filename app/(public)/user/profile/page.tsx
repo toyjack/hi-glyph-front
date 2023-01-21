@@ -16,7 +16,6 @@ async function getProfile(token:string){
     }
   })
   const data = await res.json()
-  console.log(data)
   return data
 }
 
@@ -37,7 +36,6 @@ function ProfilePage() {
     }
   }, []);
   
-  console.log(profile)
 
   return (
     <div>

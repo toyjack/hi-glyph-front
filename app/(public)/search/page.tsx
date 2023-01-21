@@ -21,7 +21,6 @@ function SearchPage() {
     const related = relatedRef.current?.value;
     const contains = containsRef.current?.value;
 
-    console.log({ user, related, contains });
     const res = await fetch(
       `https://glyph.lab.hi.u-tokyo.ac.jp/api/glyphs?contains=${contains}&related=${related}&skip=0&take=50&user=${user}`,
       {
@@ -31,7 +30,6 @@ function SearchPage() {
       }
     );
     const data = await res.json();
-    console.log(data)
     setSearchResults(data.results);
   };
   return (

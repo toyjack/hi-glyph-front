@@ -26,8 +26,8 @@ async function getGlyphData(glyphName: string) {
 }
 
 async function GlyphDetails({ params: { glyphName } }: PageProps) {
-  const glyphImgUrlPng = `https://glyph.lab.hi.u-tokyo.ac.jp/api/glyph/${glyphName}/png`;
-  const glyphImgUrlSvg = `https://glyph.lab.hi.u-tokyo.ac.jp/api/glyph/${glyphName}/svg`;
+  const glyphImgUrlPng = `https://glyph.lab.hi.u-tokyo.ac.jp/images/${glyphName}.png`;
+  const glyphImgUrlSvg = `https://glyph.lab.hi.u-tokyo.ac.jp/images/${glyphName}.svg`;
   const glyphData = await getGlyphData(glyphName)
 
   return (

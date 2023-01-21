@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 function LoginButtons() {
@@ -35,14 +35,16 @@ function Navbar() {
     { name: "About", path: "/about" },
   ];
 
-  const accessToken = localStorage.getItem("accessToken");
+  const [ifLogged, setIfLoged] = useState(false);
 
-  const ifLoggedIn = accessToken ? true : false;
-
-  let loginButtons = <LoginButtons />;
-  if (ifLoggedIn) {
-    loginButtons = <LogoutButtons />;
-  } 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setIfLoged(true);
+    }else {
+      setIfLoged(false);
+    }
+  }, [ifLogged]);
 
   return (
     <header className="md:pt-5">
@@ -63,7 +65,9 @@ function Navbar() {
           </ul>
         </div>
 
-        <div className="navbar-end lg:flex gap-2">{loginButtons}</div>
+        <div className="navbar-end lg:flex gap-2">
+          {ifLogged? <LogoutButtons /> : <LoginButtons />}
+        </div>
       </div>
     </header>
   );
